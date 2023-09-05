@@ -1,4 +1,5 @@
 import matplotlib.pyplot as plt
+import networkx as nx
 
 # Predefined Cocktail Recipes
 cocktail_recipes = {
@@ -54,32 +55,42 @@ def select_cocktail():
 # if selected_cocktail:
 #     print("Proceeding to graph generation...")
 
-# Graph Generation
+# Enhanced Graph Generation
 def generate_graph(selected_cocktail):
     # Fetch the recipe for the selected cocktail
     recipe = cocktail_recipes[selected_cocktail]
+
+    # Initialize the graph
+    G = nx.Graph()
+
+    # Add nodes and edges
+    G.add_node(selected_cocktail, color='red')
+    for ingredient, proportion in recipe.items():
+        G.add_node(ingredient, color='blue')
+        G.add_edge(selected_cocktail, ingredient, weight=proportion)
+
+    # Plotting
+    plt.figure(figsize=(10, 10))
+
+    pos = nx.spring_layout(G)  # positions for all nodes
+    nx.draw(G, pos,
+            with_labels=True,
+            node_color=[nx.get_node_attributes(G, 'color')[n] for n in G.nodes],
+            edge_color='gray',
+            width=[d['weight'] / 10 for u, v, d in G.edges(data=True)])
     
-    # Data Preparation
-    ingredients = list(recipe.keys())
-    proportions = list(recipe.values())
-    
-    # Create the bar graph
-    plt.figure(figsize=(10, 6))
-    plt.barh(ingredients, proportions, color='skyblue')
-    plt.xlabel('Quantity')
-    plt.ylabel('Ingredients')
-    plt.title(f'{selected_cocktail} Recipe')
-    plt.grid(True)
+    labels = nx.get_edge_attributes(G, 'weight')
+    nx.draw_networkx_edge_labels(G, pos, edge_labels=labels)
+
+    plt.title(f'{selected_cocktail} Recipe Network')
     
     # Save the graph as an image
-    plt.savefig(f"{selected_cocktail}_Recipe.png")
+    plt.savefig(f"{selected_cocktail}_Recipe_Network.png")
     plt.show()
-
 # Example usage:
-# generate_graph("Mojito")
+# generate_network_graph("Mojito")
 
-# Component 5: Main Function
-
+# Main Function
 def main():
     while True:
         # User selects a cocktail
