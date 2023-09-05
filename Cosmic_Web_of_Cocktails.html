@@ -1,0 +1,266 @@
+<html>
+    <head>
+        <meta charset="utf-8">
+        
+            <script src="lib/bindings/utils.js"></script>
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/vis-network/9.1.2/dist/dist/vis-network.min.css" integrity="sha512-WgxfT5LWjfszlPHXRmBWHkV2eceiWTOBvrKCNbdgDYTHrT2AeLCGbF4sZlZw3UMN3WtL0tGUoIAKsu8mllg/XA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/vis-network/9.1.2/dist/vis-network.min.js" integrity="sha512-LnvoEWDFrqGHlHmDD2101OrLcbsfkrzoSpvtSQtxK3RMnRV0eOkhhBN2dXHKRrUU8p2DGRTk35n4O8nWSVe1mQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+            
+                <link href="lib/tom-select/tom-select.css" rel="stylesheet">
+                <script src="lib/tom-select/tom-select.complete.min.js"></script>
+            
+        
+<center>
+<h1></h1>
+</center>
+
+<!-- <link rel="stylesheet" href="../node_modules/vis/dist/vis.min.css" type="text/css" />
+<script type="text/javascript" src="../node_modules/vis/dist/vis.js"> </script>-->
+        <link
+          href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css"
+          rel="stylesheet"
+          integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6"
+          crossorigin="anonymous"
+        />
+        <script
+          src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"
+          integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf"
+          crossorigin="anonymous"
+        ></script>
+
+
+        <center>
+          <h1></h1>
+        </center>
+        <style type="text/css">
+
+             #mynetwork {
+                 width: 100%;
+                 height: 600px;
+                 background-color: #101c26ff;
+                 border: 1px solid lightgray;
+                 position: relative;
+                 float: left;
+             }
+
+             
+
+             
+
+             
+        </style>
+    </head>
+
+
+    <body>
+        <div class="card" style="width: 100%">
+            
+                <div id="select-menu" class="card-header">
+                    <div class="row no-gutters">
+                        <div class="col-10 pb-2">
+                            <select
+                            class="form-select"
+                            aria-label="Default select example"
+                            onchange="selectNode([value]);"
+                            id="select-node"
+                            placeholder="Select node..."
+                            >
+                                <option selected>Select a Node by ID</option>
+                                
+                                    <option value="Mojito">Mojito</option>
+                                
+                                    <option value="Rum">Rum</option>
+                                
+                                    <option value="Mint">Mint</option>
+                                
+                                    <option value="Lime Juice">Lime Juice</option>
+                                
+                                    <option value="Soda">Soda</option>
+                                
+                                    <option value="Martini">Martini</option>
+                                
+                                    <option value="Gin">Gin</option>
+                                
+                                    <option value="Dry Vermouth">Dry Vermouth</option>
+                                
+                                    <option value="Old Fashioned">Old Fashioned</option>
+                                
+                                    <option value="Bourbon">Bourbon</option>
+                                
+                                    <option value="Angostura Bitters">Angostura Bitters</option>
+                                
+                                    <option value="Sugar">Sugar</option>
+                                
+                                    <option value="Margarita">Margarita</option>
+                                
+                                    <option value="Tequila">Tequila</option>
+                                
+                                    <option value="Triple Sec">Triple Sec</option>
+                                
+                                    <option value="Pina Colada">Pina Colada</option>
+                                
+                                    <option value="Coconut Cream">Coconut Cream</option>
+                                
+                                    <option value="Pineapple Juice">Pineapple Juice</option>
+                                
+                                    <option value="Cosmopolitan">Cosmopolitan</option>
+                                
+                                    <option value="Vodka">Vodka</option>
+                                
+                                    <option value="Whiskey Sour">Whiskey Sour</option>
+                                
+                                    <option value="Whiskey">Whiskey</option>
+                                
+                                    <option value="Lemon Juice">Lemon Juice</option>
+                                
+                                    <option value="Negroni">Negroni</option>
+                                
+                                    <option value="Campari">Campari</option>
+                                
+                                    <option value="Sweet Vermouth">Sweet Vermouth</option>
+                                
+                                    <option value="Bloody Mary">Bloody Mary</option>
+                                
+                                    <option value="Tomato Juice">Tomato Juice</option>
+                                
+                                    <option value="Tabasco">Tabasco</option>
+                                
+                                    <option value="Tequila Sunrise">Tequila Sunrise</option>
+                                
+                                    <option value="Orange Juice">Orange Juice</option>
+                                
+                                    <option value="Grenadine">Grenadine</option>
+                                
+                                    <option value="Daiquiri">Daiquiri</option>
+                                
+                                    <option value="Simple Syrup">Simple Syrup</option>
+                                
+                                    <option value="Long Island Iced Tea">Long Island Iced Tea</option>
+                                
+                                    <option value="Cola">Cola</option>
+                                
+                                    <option value="Mai Tai">Mai Tai</option>
+                                
+                                    <option value="Orgeat Syrup">Orgeat Syrup</option>
+                                
+                                    <option value="Espresso Martini">Espresso Martini</option>
+                                
+                                    <option value="Coffee Liqueur">Coffee Liqueur</option>
+                                
+                                    <option value="Espresso">Espresso</option>
+                                
+                                    <option value="Tom Collins">Tom Collins</option>
+                                
+                                    <option value="Manhattan">Manhattan</option>
+                                
+                                    <option value="Sazerac">Sazerac</option>
+                                
+                                    <option value="Rye Whiskey">Rye Whiskey</option>
+                                
+                                    <option value="Peychaud's Bitters">Peychaud's Bitters</option>
+                                
+                                    <option value="Absinthe">Absinthe</option>
+                                
+                                    <option value="Sidecar">Sidecar</option>
+                                
+                                    <option value="Cognac">Cognac</option>
+                                
+                                    <option value="Dark 'n Stormy">Dark 'n Stormy</option>
+                                
+                                    <option value="Ginger Beer">Ginger Beer</option>
+                                
+                                    <option value="French 75">French 75</option>
+                                
+                                    <option value="Champagne">Champagne</option>
+                                
+                            </select>
+                        </div>
+                        <div class="col-2 pb-2">
+                            <button type="button" class="btn btn-primary btn-block" onclick="neighbourhoodHighlight({nodes: []});">Reset Selection</button>
+                        </div>
+                    </div>
+                </div>
+            
+            
+            <div id="mynetwork" class="card-body"></div>
+        </div>
+
+        
+        
+
+        <script type="text/javascript">
+
+              // initialize global variables.
+              var edges;
+              var nodes;
+              var allNodes;
+              var allEdges;
+              var nodeColors;
+              var originalNodes;
+              var network;
+              var container;
+              var options, data;
+              var filter = {
+                  item : '',
+                  property : '',
+                  value : []
+              };
+
+              
+                  new TomSelect("#select-node",{
+                      create: false,
+                      sortField: {
+                          field: "text",
+                          direction: "asc"
+                      }
+                  });
+              
+
+              
+
+              // This method is responsible for drawing the graph, returns the drawn network
+              function drawGraph() {
+                  var container = document.getElementById('mynetwork');
+
+                  
+
+                  // parsing and collecting nodes and edges from the python
+                  nodes = new vis.DataSet([{"color": "red", "id": "Mojito", "label": "Mojito", "shape": "dot"}, {"color": "blue", "id": "Rum", "label": "Rum", "shape": "dot"}, {"color": "blue", "id": "Mint", "label": "Mint", "shape": "dot"}, {"color": "blue", "id": "Lime Juice", "label": "Lime Juice", "shape": "dot"}, {"color": "blue", "id": "Soda", "label": "Soda", "shape": "dot"}, {"color": "red", "id": "Martini", "label": "Martini", "shape": "dot"}, {"color": "blue", "id": "Gin", "label": "Gin", "shape": "dot"}, {"color": "blue", "id": "Dry Vermouth", "label": "Dry Vermouth", "shape": "dot"}, {"color": "red", "id": "Old Fashioned", "label": "Old Fashioned", "shape": "dot"}, {"color": "blue", "id": "Bourbon", "label": "Bourbon", "shape": "dot"}, {"color": "blue", "id": "Angostura Bitters", "label": "Angostura Bitters", "shape": "dot"}, {"color": "blue", "id": "Sugar", "label": "Sugar", "shape": "dot"}, {"color": "red", "id": "Margarita", "label": "Margarita", "shape": "dot"}, {"color": "blue", "id": "Tequila", "label": "Tequila", "shape": "dot"}, {"color": "blue", "id": "Triple Sec", "label": "Triple Sec", "shape": "dot"}, {"color": "red", "id": "Pina Colada", "label": "Pina Colada", "shape": "dot"}, {"color": "blue", "id": "Coconut Cream", "label": "Coconut Cream", "shape": "dot"}, {"color": "blue", "id": "Pineapple Juice", "label": "Pineapple Juice", "shape": "dot"}, {"color": "red", "id": "Cosmopolitan", "label": "Cosmopolitan", "shape": "dot"}, {"color": "blue", "id": "Vodka", "label": "Vodka", "shape": "dot"}, {"color": "red", "id": "Whiskey Sour", "label": "Whiskey Sour", "shape": "dot"}, {"color": "blue", "id": "Whiskey", "label": "Whiskey", "shape": "dot"}, {"color": "blue", "id": "Lemon Juice", "label": "Lemon Juice", "shape": "dot"}, {"color": "red", "id": "Negroni", "label": "Negroni", "shape": "dot"}, {"color": "blue", "id": "Campari", "label": "Campari", "shape": "dot"}, {"color": "blue", "id": "Sweet Vermouth", "label": "Sweet Vermouth", "shape": "dot"}, {"color": "red", "id": "Bloody Mary", "label": "Bloody Mary", "shape": "dot"}, {"color": "blue", "id": "Tomato Juice", "label": "Tomato Juice", "shape": "dot"}, {"color": "blue", "id": "Tabasco", "label": "Tabasco", "shape": "dot"}, {"color": "red", "id": "Tequila Sunrise", "label": "Tequila Sunrise", "shape": "dot"}, {"color": "blue", "id": "Orange Juice", "label": "Orange Juice", "shape": "dot"}, {"color": "blue", "id": "Grenadine", "label": "Grenadine", "shape": "dot"}, {"color": "red", "id": "Daiquiri", "label": "Daiquiri", "shape": "dot"}, {"color": "blue", "id": "Simple Syrup", "label": "Simple Syrup", "shape": "dot"}, {"color": "red", "id": "Long Island Iced Tea", "label": "Long Island Iced Tea", "shape": "dot"}, {"color": "blue", "id": "Cola", "label": "Cola", "shape": "dot"}, {"color": "red", "id": "Mai Tai", "label": "Mai Tai", "shape": "dot"}, {"color": "blue", "id": "Orgeat Syrup", "label": "Orgeat Syrup", "shape": "dot"}, {"color": "red", "id": "Espresso Martini", "label": "Espresso Martini", "shape": "dot"}, {"color": "blue", "id": "Coffee Liqueur", "label": "Coffee Liqueur", "shape": "dot"}, {"color": "blue", "id": "Espresso", "label": "Espresso", "shape": "dot"}, {"color": "red", "id": "Tom Collins", "label": "Tom Collins", "shape": "dot"}, {"color": "red", "id": "Manhattan", "label": "Manhattan", "shape": "dot"}, {"color": "red", "id": "Sazerac", "label": "Sazerac", "shape": "dot"}, {"color": "blue", "id": "Rye Whiskey", "label": "Rye Whiskey", "shape": "dot"}, {"color": "blue", "id": "Peychaud\u0027s Bitters", "label": "Peychaud\u0027s Bitters", "shape": "dot"}, {"color": "blue", "id": "Absinthe", "label": "Absinthe", "shape": "dot"}, {"color": "red", "id": "Sidecar", "label": "Sidecar", "shape": "dot"}, {"color": "blue", "id": "Cognac", "label": "Cognac", "shape": "dot"}, {"color": "red", "id": "Dark \u0027n Stormy", "label": "Dark \u0027n Stormy", "shape": "dot"}, {"color": "blue", "id": "Ginger Beer", "label": "Ginger Beer", "shape": "dot"}, {"color": "red", "id": "French 75", "label": "French 75", "shape": "dot"}, {"color": "blue", "id": "Champagne", "label": "Champagne", "shape": "dot"}]);
+                  edges = new vis.DataSet([{"from": "Mojito", "to": "Rum", "value": 50}, {"from": "Mojito", "to": "Mint", "value": 10}, {"from": "Mojito", "to": "Lime Juice", "value": 25}, {"from": "Mojito", "to": "Soda", "value": 75}, {"from": "Martini", "to": "Gin", "value": 60}, {"from": "Martini", "to": "Dry Vermouth", "value": 10}, {"from": "Old Fashioned", "to": "Bourbon", "value": 45}, {"from": "Old Fashioned", "to": "Angostura Bitters", "value": 2}, {"from": "Old Fashioned", "to": "Sugar", "value": 1}, {"from": "Margarita", "to": "Tequila", "value": 50}, {"from": "Margarita", "to": "Lime Juice", "value": 20}, {"from": "Margarita", "to": "Triple Sec", "value": 20}, {"from": "Pina Colada", "to": "Rum", "value": 50}, {"from": "Pina Colada", "to": "Coconut Cream", "value": 25}, {"from": "Pina Colada", "to": "Pineapple Juice", "value": 25}, {"from": "Cosmopolitan", "to": "Vodka", "value": 40}, {"from": "Cosmopolitan", "to": "Triple Sec", "value": 20}, {"from": "Cosmopolitan", "to": "Lime Juice", "value": 20}, {"from": "Whiskey Sour", "to": "Whiskey", "value": 45}, {"from": "Whiskey Sour", "to": "Lemon Juice", "value": 25}, {"from": "Whiskey Sour", "to": "Sugar", "value": 10}, {"from": "Negroni", "to": "Gin", "value": 30}, {"from": "Negroni", "to": "Campari", "value": 30}, {"from": "Negroni", "to": "Sweet Vermouth", "value": 30}, {"from": "Bloody Mary", "to": "Vodka", "value": 50}, {"from": "Bloody Mary", "to": "Tomato Juice", "value": 100}, {"from": "Bloody Mary", "to": "Tabasco", "value": 5}, {"from": "Tequila Sunrise", "to": "Tequila", "value": 50}, {"from": "Tequila Sunrise", "to": "Orange Juice", "value": 100}, {"from": "Tequila Sunrise", "to": "Grenadine", "value": 10}, {"from": "Daiquiri", "to": "Rum", "value": 45}, {"from": "Daiquiri", "to": "Lime Juice", "value": 25}, {"from": "Daiquiri", "to": "Simple Syrup", "value": 15}, {"from": "Long Island Iced Tea", "to": "Vodka", "value": 15}, {"from": "Long Island Iced Tea", "to": "Tequila", "value": 15}, {"from": "Long Island Iced Tea", "to": "Rum", "value": 15}, {"from": "Long Island Iced Tea", "to": "Gin", "value": 15}, {"from": "Long Island Iced Tea", "to": "Triple Sec", "value": 15}, {"from": "Long Island Iced Tea", "to": "Lemon Juice", "value": 25}, {"from": "Long Island Iced Tea", "to": "Cola", "value": 30}, {"from": "Mai Tai", "to": "Rum", "value": 40}, {"from": "Mai Tai", "to": "Lime Juice", "value": 20}, {"from": "Mai Tai", "to": "Orgeat Syrup", "value": 15}, {"from": "Mai Tai", "to": "Triple Sec", "value": 15}, {"from": "Espresso Martini", "to": "Vodka", "value": 50}, {"from": "Espresso Martini", "to": "Coffee Liqueur", "value": 25}, {"from": "Espresso Martini", "to": "Espresso", "value": 25}, {"from": "Tom Collins", "to": "Gin", "value": 45}, {"from": "Tom Collins", "to": "Lemon Juice", "value": 30}, {"from": "Tom Collins", "to": "Simple Syrup", "value": 10}, {"from": "Tom Collins", "to": "Soda", "value": 60}, {"from": "Manhattan", "to": "Whiskey", "value": 50}, {"from": "Manhattan", "to": "Sweet Vermouth", "value": 20}, {"from": "Manhattan", "to": "Angostura Bitters", "value": 2}, {"from": "Sazerac", "to": "Rye Whiskey", "value": 50}, {"from": "Sazerac", "to": "Peychaud\u0027s Bitters", "value": 5}, {"from": "Sazerac", "to": "Absinthe", "value": 5}, {"from": "Sazerac", "to": "Sugar", "value": 1}, {"from": "Sidecar", "to": "Cognac", "value": 50}, {"from": "Sidecar", "to": "Triple Sec", "value": 20}, {"from": "Sidecar", "to": "Lemon Juice", "value": 20}, {"from": "Dark \u0027n Stormy", "to": "Rum", "value": 50}, {"from": "Dark \u0027n Stormy", "to": "Ginger Beer", "value": 100}, {"from": "Dark \u0027n Stormy", "to": "Lime Juice", "value": 10}, {"from": "French 75", "to": "Gin", "value": 30}, {"from": "French 75", "to": "Champagne", "value": 90}, {"from": "French 75", "to": "Lemon Juice", "value": 10}, {"from": "French 75", "to": "Simple Syrup", "value": 5}]);
+
+                  nodeColors = {};
+                  allNodes = nodes.get({ returnType: "Object" });
+                  for (nodeId in allNodes) {
+                    nodeColors[nodeId] = allNodes[nodeId].color;
+                  }
+                  allEdges = edges.get({ returnType: "Object" });
+                  // adding nodes and edges to the graph
+                  data = {nodes: nodes, edges: edges};
+
+                  var options = {"nodes": {"borderWidth": 0, "borderWidthSelected": 1, "font": {"size": 22, "strokeWidth": 3, "strokeColor": "rgba(255,255,255,1)"}}};
+
+                  
+
+
+                  
+
+                  network = new vis.Network(container, data, options);
+
+                  
+
+                  
+                    network.on("selectNode", neighbourhoodHighlight);
+                  
+
+                  
+
+
+                  
+
+                  return network;
+
+              }
+              drawGraph();
+        </script>
+    </body>
+</html>

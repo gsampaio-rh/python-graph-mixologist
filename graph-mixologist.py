@@ -1,5 +1,5 @@
-import matplotlib.pyplot as plt
-import networkx as nx
+from pyvis.network import Network
+import pandas as pd
 
 # Predefined Cocktail Recipes
 cocktail_recipes = {
@@ -50,85 +50,77 @@ def select_cocktail():
         except ValueError:
             print("Please enter a valid number.")
 
-# Example usage:
-# selected_cocktail = select_cocktail()
-# if selected_cocktail:
-#     print("Proceeding to graph generation...")
-
-# Enhanced Graph Generation
-def generate_graph(selected_cocktail):
+# Enhanced Graph Generation using PyVis
+def generate_cocktail_graph(selected_cocktail):
     # Fetch the recipe for the selected cocktail
     recipe = cocktail_recipes[selected_cocktail]
 
-    # Initialize the graph
-    G = nx.Graph()
+    # Initialize the PyVis network
+    nt = Network(select_menu=True, filter_menu=True)
+    nt.show_buttons(filter_=['physics'])
+    
 
     # Add nodes and edges
-    G.add_node(selected_cocktail, color='red')
+    nt.add_node(selected_cocktail, label=selected_cocktail, color='red')
     for ingredient, proportion in recipe.items():
-        G.add_node(ingredient, color='blue')
-        G.add_edge(selected_cocktail, ingredient, weight=proportion)
+        nt.add_node(ingredient, label=ingredient, color='blue')
+        nt.add_edge(selected_cocktail, ingredient, value=proportion)
 
-    # Plotting
-    plt.figure(figsize=(10, 10))
+    # Set the physics layout to improve visualization
+    nt.barnes_hut()
 
-    pos = nx.spring_layout(G)  # positions for all nodes
-    nx.draw(G, pos,
-            with_labels=True,
-            node_color=[nx.get_node_attributes(G, 'color')[n] for n in G.nodes],
-            edge_color='gray',
-            width=[d['weight'] / 10 for u, v, d in G.edges(data=True)])
-    
-    labels = nx.get_edge_attributes(G, 'weight')
-    nx.draw_networkx_edge_labels(G, pos, edge_labels=labels)
+    # Save the graph as an HTML file
+    graph_html = f"{selected_cocktail}_Recipe_Network.html"
+    nt.show(graph_html, notebook=False)
 
-    plt.title(f'{selected_cocktail} Recipe Network')
-    
-    # Save the graph as an image
-    plt.savefig(f"{selected_cocktail}_Recipe_Network.png")
-    plt.show()
-# Example usage:
-# generate_network_graph("Mojito")
-
+# Enhanced Cosmic Web Generation using PyVis
 def generate_cosmic_web():
-    # Initialize the graph
-    G = nx.Graph()
-    
+    # Initialize the PyVis network
+    nt = Network(bgcolor="#101c26ff", select_menu=True)
+    # nt.show_buttons(filter_=['physics'])
+    # nt.show_buttons(filter_=['nodes'])
+  
+    added_nodes = set()  # To track added nodes
+
     for cocktail, recipe in cocktail_recipes.items():
-        G.add_node(cocktail, color='red')
+        nt.add_node(cocktail, label=cocktail, color='red')
         for ingredient, proportion in recipe.items():
-            if not G.has_node(ingredient):
-                G.add_node(ingredient, color='blue')
-            G.add_edge(cocktail, ingredient, weight=proportion)
+            if ingredient not in added_nodes:
+                nt.add_node(ingredient, label=ingredient, color='blue')
+                added_nodes.add(ingredient)  # Add to the set of added nodes
+            nt.add_edge(cocktail, ingredient, value=proportion)
 
-    # Plotting
-    plt.figure(figsize=(12, 12))
+    # Set the physics layout to improve visualization
+    nt.force_atlas_2based()
 
-    pos = nx.spring_layout(G)  # positions for all nodes
-    nx.draw(G, pos,
-            with_labels=True,
-            node_color=[nx.get_node_attributes(G, 'color')[n] for n in G.nodes],
-            edge_color='gray',
-            width=[d['weight'] / 10 for u, v, d in G.edges(data=True)])
+    # Render the HTML using the template
+    graph_html = "Cosmic_Web_of_Cocktails.html"
     
-    plt.title('Cosmic Web of Cocktails')
-    
-    # Save the graph as an image
-    plt.savefig("Cosmic_Web_of_Cocktails.png")
-    plt.show()
+    nt.set_options("""
+      var options = {
+        "nodes": {
+          "borderWidth": 0,
+          "borderWidthSelected": 1,
+          "font": {
+            "size": 22,
+            "strokeWidth": 3,
+            "strokeColor": "rgba(255,255,255,1)"
+          }
+        }
+      }
+      """)
+    nt.show(graph_html, notebook=False)
 
 # Main Function
 def main():
     while True:
-        # User makes a selection
         selected_option = select_cocktail()
         
         if selected_option == 'Cosmic Web':
             generate_cosmic_web()
         elif selected_option:
-            generate_graph(selected_option)
+            generate_cocktail_graph(selected_option)
 
-        # Ask if the user wants to explore further
         another = input("Would you like to explore further? (y/n): ")
         if another.lower() != 'y':
             print("Thank you for using the Cocktail Graph Generator. Farewell!")
