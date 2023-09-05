@@ -126,7 +126,7 @@ def main():
         if selected_option == 'Cosmic Web':
             generate_cosmic_web()
         elif selected_option:
-            generate_network_graph(selected_option)
+            generate_graph(selected_option)
 
         # Ask if the user wants to explore further
         another = input("Would you like to explore further? (y/n): ")
