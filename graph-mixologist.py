@@ -131,7 +131,7 @@ def main():
         # Ask if the user wants to explore further
         another = input("Would you like to explore further? (y/n): ")
         if another.lower() != 'y':
-            print("Thank you for using the Magical Cocktail Graph Generator. Farewell!")
+            print("Thank you for using the Cocktail Graph Generator. Farewell!")
             break
 
 # Invoke the Main Function to start the program
