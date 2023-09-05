@@ -28,19 +28,19 @@ cocktail_recipes = {
 # User Selection Interface
 def select_cocktail():
     while True:
-        print("Welcome to the Cocktail Graph Generator!")
+        print("\nWelcome to the Cocktail Graph Generator!")
         print("Please select a cocktail from the following list:")
+        print("0. Cosmic Web of All Cocktails")
         
-        # Display available cocktails
         for idx, cocktail in enumerate(cocktail_recipes.keys(), 1):
             print(f"{idx}. {cocktail}")
 
         try:
-            # User input for cocktail selection
-            user_choice = int(input("Enter the number corresponding to your cocktail choice: "))
+            user_choice = int(input("Enter the number corresponding to your choice: "))
             
-            # Validate user input and fetch the corresponding recipe
-            if 1 <= user_choice <= len(cocktail_recipes):
+            if user_choice == 0:
+                return 'Cosmic Web'
+            elif 1 <= user_choice <= len(cocktail_recipes):
                 selected_cocktail = list(cocktail_recipes.keys())[user_choice - 1]
                 print(f"You have selected: {selected_cocktail}")
                 return selected_cocktail
@@ -90,21 +90,49 @@ def generate_graph(selected_cocktail):
 # Example usage:
 # generate_network_graph("Mojito")
 
+def generate_cosmic_web():
+    # Initialize the graph
+    G = nx.Graph()
+    
+    for cocktail, recipe in cocktail_recipes.items():
+        G.add_node(cocktail, color='red')
+        for ingredient, proportion in recipe.items():
+            if not G.has_node(ingredient):
+                G.add_node(ingredient, color='blue')
+            G.add_edge(cocktail, ingredient, weight=proportion)
+
+    # Plotting
+    plt.figure(figsize=(12, 12))
+
+    pos = nx.spring_layout(G)  # positions for all nodes
+    nx.draw(G, pos,
+            with_labels=True,
+            node_color=[nx.get_node_attributes(G, 'color')[n] for n in G.nodes],
+            edge_color='gray',
+            width=[d['weight'] / 10 for u, v, d in G.edges(data=True)])
+    
+    plt.title('Cosmic Web of Cocktails')
+    
+    # Save the graph as an image
+    plt.savefig("Cosmic_Web_of_Cocktails.png")
+    plt.show()
+
 # Main Function
 def main():
     while True:
-        # User selects a cocktail
-        selected_cocktail = select_cocktail()
+        # User makes a selection
+        selected_option = select_cocktail()
         
-        if selected_cocktail:
-            # Generate the graph for the selected cocktail
-            generate_graph(selected_cocktail)
-            
-            # Ask if the user wants to generate another graph
-            another = input("Would you like to generate another graph? (y/n): ")
-            if another.lower() != 'y':
-                print("Thank you for using the Magical Cocktail Graph Generator. Farewell!")
-                break
+        if selected_option == 'Cosmic Web':
+            generate_cosmic_web()
+        elif selected_option:
+            generate_network_graph(selected_option)
+
+        # Ask if the user wants to explore further
+        another = input("Would you like to explore further? (y/n): ")
+        if another.lower() != 'y':
+            print("Thank you for using the Magical Cocktail Graph Generator. Farewell!")
+            break
 
 # Invoke the Main Function to start the program
 if __name__ == "__main__":
