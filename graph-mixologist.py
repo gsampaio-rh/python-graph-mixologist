@@ -50,15 +50,20 @@ def select_cocktail():
         except ValueError:
             print("Please enter a valid number.")
 
+def initVisNetwork():
+    # Initialize the PyVis network
+    nt = Network(height="750px", width="30%", bgcolor="#101c26ff", font_color="white", select_menu=True)
+    nt.show_buttons(filter_=['physics'])
+    # nt.show_buttons(filter_=['nodes'])
+
+    return nt
+
 # Enhanced Graph Generation using PyVis
 def generate_cocktail_graph(selected_cocktail):
     # Fetch the recipe for the selected cocktail
     recipe = cocktail_recipes[selected_cocktail]
 
-    # Initialize the PyVis network
-    nt = Network(select_menu=True, filter_menu=True)
-    nt.show_buttons(filter_=['physics'])
-    
+    nt = initVisNetwork()
 
     # Add nodes and edges
     nt.add_node(selected_cocktail, label=selected_cocktail, color='red')
@@ -76,9 +81,7 @@ def generate_cocktail_graph(selected_cocktail):
 # Enhanced Cosmic Web Generation using PyVis
 def generate_cosmic_web():
     # Initialize the PyVis network
-    nt = Network(bgcolor="#101c26ff", font_color="white", select_menu=True)
-    nt.show_buttons(filter_=['physics'])
-    # nt.show_buttons(filter_=['nodes'])
+    nt = initVisNetwork()
   
     added_nodes = set()  # To track added nodes
 
@@ -96,17 +99,6 @@ def generate_cosmic_web():
     # Render the HTML using the template
     graph_html = "Cosmic_Web_of_Cocktails.html"
     
-    # nt.set_options("""
-    #   var options = {
-    #     "nodes": {
-    #       "borderWidth": 0,
-    #       "borderWidthSelected": 1,
-    #       "font": {
-    #         "size": 22
-    #       }
-    #     }
-    #   }
-    #   """)
     nt.show(graph_html, notebook=False)
 
 # Main Function
