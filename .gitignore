@@ -65,6 +65,9 @@ myenv/
 venv/
 ENV/
 
+# lib
+lib/
+
 # Spyder project settings
 .spyderproject
 .spyproject
