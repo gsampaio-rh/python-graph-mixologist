@@ -24,7 +24,27 @@ cocktail_recipes = {
     "Sazerac": {"Rye Whiskey": 50, "Peychaud's Bitters": 5, "Absinthe": 5, "Sugar": 1},
     "Sidecar": {"Cognac": 50, "Triple Sec": 20, "Lemon Juice": 20},
     "Dark 'n Stormy": {"Rum": 50, "Ginger Beer": 100, "Lime Juice": 10},
-    "French 75": {"Gin": 30, "Champagne": 90, "Lemon Juice": 10, "Simple Syrup": 5}
+    "French 75": {"Gin": 30, "Champagne": 90, "Lemon Juice": 10, "Simple Syrup": 5},
+    "Blue Lagoon": {"Vodka": 50, "Blue Curacao": 20, "Lemonade": 100},
+    "Mint Julep": {"Bourbon": 60, "Mint Leaves": 15, "Simple Syrup": 10},
+    "Mango Daiquiri": {"Rum": 45, "Mango Puree": 30, "Lime Juice": 20},
+    "Sex on the Beach": {"Vodka": 50, "Peach Schnapps": 20, "Cranberry Juice": 40, "Orange Juice": 40},
+    "White Russian": {"Vodka": 50, "Kahlúa": 25, "Cream": 25},
+    "Piña Colada": {"Rum": 50, "Coconut Cream": 25, "Pineapple Juice": 25},
+    "Margarita": {"Tequila": 50, "Triple Sec": 20, "Lime Juice": 20},
+    "Blue Hawaii": {"Rum": 45, "Blue Curacao": 20, "Pineapple Juice": 30, "Sweet and Sour Mix": 20},
+    "Singapore Sling": {"Gin": 40, "Cherry Brandy": 20, "Grenadine": 10, "Pineapple Juice": 40, "Lime Juice": 20},
+    "Mimosa": {"Champagne": 50, "Orange Juice": 50},
+    "Screwdriver": {"Vodka": 50, "Orange Juice": 100},
+    "White Sangria": {"White Wine": 75, "Brandy": 30, "Orange Liqueur": 20, "Apple": 1, "Orange": 1, "Lemon": 1},
+    "Black Russian": {"Vodka": 50, "Kahlúa": 50},
+    "Tequila Sunrise": {"Tequila": 50, "Orange Juice": 100, "Grenadine": 10},
+    "Irish Coffee": {"Irish Whiskey": 50, "Hot Coffee": 150, "Cream": 20, "Sugar": 10},
+    "Caipirinha": {"Cachaça": 50, "Lime": 1, "Sugar": 1},
+    "Sloe Gin Fizz": {"Sloe Gin": 40, "Lemon Juice": 20, "Simple Syrup": 15, "Soda": 60},
+    "Grasshopper": {"Crème de Menthe": 30, "Crème de Cacao": 30, "Cream": 30},
+    "Brandy Alexander": {"Brandy": 50, "Crème de Cacao": 20, "Cream": 20},
+    "Aperol Spritz": {"Aperol": 50, "Prosecco": 75, "Soda": 25}
 }
 
 # User Selection Interface
@@ -57,7 +77,7 @@ def select_cocktail():
 # This function returns a configured network object.
 def initVisNetwork():
     # Initialize the PyVis network
-    nt = Network(height="750px", width="30%", bgcolor="#101c26ff", font_color="white", select_menu=True)
+    nt = Network(height="750px", width="60%", bgcolor="#101c26ff", font_color="white", select_menu=True)
     # nt.show_buttons(filter_=['physics'])
     # nt.show_buttons(filter_=['nodes'])
 
