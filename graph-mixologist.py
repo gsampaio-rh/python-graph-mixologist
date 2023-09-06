@@ -83,10 +83,10 @@ def generate_cosmic_web():
     added_nodes = set()  # To track added nodes
 
     for cocktail, recipe in cocktail_recipes.items():
-        nt.add_node(cocktail, label=cocktail, color='orange')
+        nt.add_node(cocktail, label=cocktail, color='rgba(242, 123, 53, 1)')
         for ingredient, proportion in recipe.items():
             if ingredient not in added_nodes:
-                nt.add_node(ingredient, label=ingredient, color='blue')
+                nt.add_node(ingredient, label=ingredient, color='rgba(28, 65, 140, 1)')
                 added_nodes.add(ingredient)  # Add to the set of added nodes
             nt.add_edge(cocktail, ingredient, value=proportion)
 
