@@ -1,7 +1,9 @@
 from pyvis.network import Network
+from pyvis.options import Layout
 import pandas as pd
 
 # Predefined Cocktail Recipes
+# Define a dictionary containing cocktail recipes with ingredients and their proportions.
 cocktail_recipes = {
     "Mojito": {"Rum": 50, "Mint": 10, "Lime Juice": 25, "Soda": 75},
     "Martini": {"Gin": 60, "Dry Vermouth": 10},
@@ -26,6 +28,7 @@ cocktail_recipes = {
 }
 
 # User Selection Interface
+# Create a function to interact with the user and allow them to select a cocktail.
 def select_cocktail():
     while True:
         print("\nWelcome to the Cocktail Graph Generator!")
@@ -50,15 +53,20 @@ def select_cocktail():
         except ValueError:
             print("Please enter a valid number.")
 
+# Initialize the PyVis network with specific settings.
+# This function returns a configured network object.
 def initVisNetwork():
     # Initialize the PyVis network
     nt = Network(height="750px", width="30%", bgcolor="#101c26ff", font_color="white", select_menu=True)
-    nt.show_buttons(filter_=['physics'])
+    # nt.show_buttons(filter_=['physics'])
     # nt.show_buttons(filter_=['nodes'])
 
     return nt
 
 # Enhanced Graph Generation using PyVis
+# Generate a graph for a selected cocktail.
+# It adds nodes and edges for ingredients and proportions.
+# The graph is then displayed and saved as an HTML file.
 def generate_cocktail_graph(selected_cocktail):
     # Fetch the recipe for the selected cocktail
     recipe = cocktail_recipes[selected_cocktail]
@@ -79,6 +87,8 @@ def generate_cocktail_graph(selected_cocktail):
     nt.show(graph_html, notebook=False)
 
 # Enhanced Cosmic Web Generation using PyVis
+# Generate a cosmic web graph that connects all cocktails and ingredients. 
+# It sets up nodes and edges for each, and the resulting graph is displayed and saved as HTML.
 def generate_cosmic_web():
     # Initialize the PyVis network
     nt = initVisNetwork()
@@ -86,7 +96,7 @@ def generate_cosmic_web():
     added_nodes = set()  # To track added nodes
 
     for cocktail, recipe in cocktail_recipes.items():
-        nt.add_node(cocktail, label=cocktail, color='rgba(242, 123, 53, 1)')
+        nt.add_node(cocktail, shape="circle", label=cocktail, color='rgba(166, 45, 45, 1)')
         for ingredient, proportion in recipe.items():
             if ingredient not in added_nodes:
                 nt.add_node(ingredient, label=ingredient, color='rgba(28, 65, 140, 1)')
@@ -102,6 +112,9 @@ def generate_cosmic_web():
     nt.show(graph_html, notebook=False)
 
 # Main Function
+# The main program loop where the user interacts with the cocktail graph generator. 
+# It allows users to select cocktails and explore their ingredients' relationships.
+# The loop continues until the user decides to exit.
 def main():
     while True:
         selected_option = select_cocktail()
